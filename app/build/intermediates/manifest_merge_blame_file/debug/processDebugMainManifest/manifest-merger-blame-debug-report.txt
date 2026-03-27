@@ -1,0 +1,158 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.bluetoothintercomapp"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+7-->INJECTED
+8        android:minSdkVersion="24"
+8-->INJECTED
+9        android:targetSdkVersion="34" />
+9-->INJECTED
+10
+11    <uses-permission
+11-->C:\Users\mrrob\OneDrive\Documents\Offline Bluetooth Chat App with Earbuds Compatibility\app\src\main\AndroidManifest.xml:5:5-95
+12        android:name="android.permission.BLUETOOTH"
+12-->C:\Users\mrrob\OneDrive\Documents\Offline Bluetooth Chat App with Earbuds Compatibility\app\src\main\AndroidManifest.xml:5:22-65
+13        android:maxSdkVersion="30" />
+13-->C:\Users\mrrob\OneDrive\Documents\Offline Bluetooth Chat App with Earbuds Compatibility\app\src\main\AndroidManifest.xml:5:66-92
+14    <uses-permission
+14-->C:\Users\mrrob\OneDrive\Documents\Offline Bluetooth Chat App with Earbuds Compatibility\app\src\main\AndroidManifest.xml:6:5-101
+15        android:name="android.permission.BLUETOOTH_ADMIN"
+15-->C:\Users\mrrob\OneDrive\Documents\Offline Bluetooth Chat App with Earbuds Compatibility\app\src\main\AndroidManifest.xml:6:22-71
+16        android:maxSdkVersion="30" />
+16-->C:\Users\mrrob\OneDrive\Documents\Offline Bluetooth Chat App with Earbuds Compatibility\app\src\main\AndroidManifest.xml:6:72-98
+17    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+17-->C:\Users\mrrob\OneDrive\Documents\Offline Bluetooth Chat App with Earbuds Compatibility\app\src\main\AndroidManifest.xml:7:5-76
+17-->C:\Users\mrrob\OneDrive\Documents\Offline Bluetooth Chat App with Earbuds Compatibility\app\src\main\AndroidManifest.xml:7:22-73
+18    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+18-->C:\Users\mrrob\OneDrive\Documents\Offline Bluetooth Chat App with Earbuds Compatibility\app\src\main\AndroidManifest.xml:8:5-73
+18-->C:\Users\mrrob\OneDrive\Documents\Offline Bluetooth Chat App with Earbuds Compatibility\app\src\main\AndroidManifest.xml:8:22-70
+19    <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" />
+19-->C:\Users\mrrob\OneDrive\Documents\Offline Bluetooth Chat App with Earbuds Compatibility\app\src\main\AndroidManifest.xml:9:5-78
+19-->C:\Users\mrrob\OneDrive\Documents\Offline Bluetooth Chat App with Earbuds Compatibility\app\src\main\AndroidManifest.xml:9:22-75
+20    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+20-->C:\Users\mrrob\OneDrive\Documents\Offline Bluetooth Chat App with Earbuds Compatibility\app\src\main\AndroidManifest.xml:10:5-71
+20-->C:\Users\mrrob\OneDrive\Documents\Offline Bluetooth Chat App with Earbuds Compatibility\app\src\main\AndroidManifest.xml:10:22-68
+21    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+21-->C:\Users\mrrob\OneDrive\Documents\Offline Bluetooth Chat App with Earbuds Compatibility\app\src\main\AndroidManifest.xml:11:5-80
+21-->C:\Users\mrrob\OneDrive\Documents\Offline Bluetooth Chat App with Earbuds Compatibility\app\src\main\AndroidManifest.xml:11:22-77
+22
+23    <permission
+23-->[androidx.core:core:1.12.0] C:\Users\mrrob\.gradle\caches\9.3.1\transforms\30750a85727bc67d5cd8720c601fefc8\workspace\transformed\core-1.12.0\AndroidManifest.xml:22:5-24:47
+24        android:name="com.example.bluetoothintercomapp.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+24-->[androidx.core:core:1.12.0] C:\Users\mrrob\.gradle\caches\9.3.1\transforms\30750a85727bc67d5cd8720c601fefc8\workspace\transformed\core-1.12.0\AndroidManifest.xml:23:9-81
+25        android:protectionLevel="signature" />
+25-->[androidx.core:core:1.12.0] C:\Users\mrrob\.gradle\caches\9.3.1\transforms\30750a85727bc67d5cd8720c601fefc8\workspace\transformed\core-1.12.0\AndroidManifest.xml:24:9-44
+26
+27    <uses-permission android:name="com.example.bluetoothintercomapp.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+27-->[androidx.core:core:1.12.0] C:\Users\mrrob\.gradle\caches\9.3.1\transforms\30750a85727bc67d5cd8720c601fefc8\workspace\transformed\core-1.12.0\AndroidManifest.xml:26:5-97
+27-->[androidx.core:core:1.12.0] C:\Users\mrrob\.gradle\caches\9.3.1\transforms\30750a85727bc67d5cd8720c601fefc8\workspace\transformed\core-1.12.0\AndroidManifest.xml:26:22-94
+28
+29    <application
+29-->C:\Users\mrrob\OneDrive\Documents\Offline Bluetooth Chat App with Earbuds Compatibility\app\src\main\AndroidManifest.xml:13:5-28:19
+30        android:allowBackup="true"
+30-->C:\Users\mrrob\OneDrive\Documents\Offline Bluetooth Chat App with Earbuds Compatibility\app\src\main\AndroidManifest.xml:14:9-35
+31        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+31-->[androidx.core:core:1.12.0] C:\Users\mrrob\.gradle\caches\9.3.1\transforms\30750a85727bc67d5cd8720c601fefc8\workspace\transformed\core-1.12.0\AndroidManifest.xml:28:18-86
+32        android:debuggable="true"
+33        android:extractNativeLibs="false"
+33-->INJECTED
+34        android:icon="@mipmap/ic_launcher"
+34-->C:\Users\mrrob\OneDrive\Documents\Offline Bluetooth Chat App with Earbuds Compatibility\app\src\main\AndroidManifest.xml:15:9-43
+35        android:label="@string/app_name"
+35-->C:\Users\mrrob\OneDrive\Documents\Offline Bluetooth Chat App with Earbuds Compatibility\app\src\main\AndroidManifest.xml:16:9-41
+36        android:roundIcon="@mipmap/ic_launcher_round"
+36-->C:\Users\mrrob\OneDrive\Documents\Offline Bluetooth Chat App with Earbuds Compatibility\app\src\main\AndroidManifest.xml:17:9-54
+37        android:supportsRtl="true"
+37-->C:\Users\mrrob\OneDrive\Documents\Offline Bluetooth Chat App with Earbuds Compatibility\app\src\main\AndroidManifest.xml:18:9-35
+38        android:testOnly="true"
+39        android:theme="@style/Theme.AppCompat.Light.DarkActionBar" >
+39-->C:\Users\mrrob\OneDrive\Documents\Offline Bluetooth Chat App with Earbuds Compatibility\app\src\main\AndroidManifest.xml:19:9-67
+40        <activity
+40-->C:\Users\mrrob\OneDrive\Documents\Offline Bluetooth Chat App with Earbuds Compatibility\app\src\main\AndroidManifest.xml:20:9-27:20
+41            android:name="com.example.bluetoothintercomapp.MainActivity"
+41-->C:\Users\mrrob\OneDrive\Documents\Offline Bluetooth Chat App with Earbuds Compatibility\app\src\main\AndroidManifest.xml:21:13-41
+42            android:exported="true" >
+42-->C:\Users\mrrob\OneDrive\Documents\Offline Bluetooth Chat App with Earbuds Compatibility\app\src\main\AndroidManifest.xml:22:13-36
+43            <intent-filter>
+43-->C:\Users\mrrob\OneDrive\Documents\Offline Bluetooth Chat App with Earbuds Compatibility\app\src\main\AndroidManifest.xml:23:13-26:29
+44                <action android:name="android.intent.action.MAIN" />
+44-->C:\Users\mrrob\OneDrive\Documents\Offline Bluetooth Chat App with Earbuds Compatibility\app\src\main\AndroidManifest.xml:24:17-69
+44-->C:\Users\mrrob\OneDrive\Documents\Offline Bluetooth Chat App with Earbuds Compatibility\app\src\main\AndroidManifest.xml:24:25-66
+45
+46                <category android:name="android.intent.category.LAUNCHER" />
+46-->C:\Users\mrrob\OneDrive\Documents\Offline Bluetooth Chat App with Earbuds Compatibility\app\src\main\AndroidManifest.xml:25:17-77
+46-->C:\Users\mrrob\OneDrive\Documents\Offline Bluetooth Chat App with Earbuds Compatibility\app\src\main\AndroidManifest.xml:25:27-74
+47            </intent-filter>
+48        </activity>
+49
+50        <provider
+50-->[androidx.emoji2:emoji2:1.2.0] C:\Users\mrrob\.gradle\caches\9.3.1\transforms\e89965aa3207e15a02edfe01f4de2c10\workspace\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
+51            android:name="androidx.startup.InitializationProvider"
+51-->[androidx.emoji2:emoji2:1.2.0] C:\Users\mrrob\.gradle\caches\9.3.1\transforms\e89965aa3207e15a02edfe01f4de2c10\workspace\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:25:13-67
+52            android:authorities="com.example.bluetoothintercomapp.androidx-startup"
+52-->[androidx.emoji2:emoji2:1.2.0] C:\Users\mrrob\.gradle\caches\9.3.1\transforms\e89965aa3207e15a02edfe01f4de2c10\workspace\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:26:13-68
+53            android:exported="false" >
+53-->[androidx.emoji2:emoji2:1.2.0] C:\Users\mrrob\.gradle\caches\9.3.1\transforms\e89965aa3207e15a02edfe01f4de2c10\workspace\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:27:13-37
+54            <meta-data
+54-->[androidx.emoji2:emoji2:1.2.0] C:\Users\mrrob\.gradle\caches\9.3.1\transforms\e89965aa3207e15a02edfe01f4de2c10\workspace\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
+55                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+55-->[androidx.emoji2:emoji2:1.2.0] C:\Users\mrrob\.gradle\caches\9.3.1\transforms\e89965aa3207e15a02edfe01f4de2c10\workspace\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:30:17-75
+56                android:value="androidx.startup" />
+56-->[androidx.emoji2:emoji2:1.2.0] C:\Users\mrrob\.gradle\caches\9.3.1\transforms\e89965aa3207e15a02edfe01f4de2c10\workspace\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:31:17-49
+57            <meta-data
+57-->[androidx.lifecycle:lifecycle-process:2.6.1] C:\Users\mrrob\.gradle\caches\9.3.1\transforms\01c26e469261bece587fc1f3af6c7fae\workspace\transformed\jetified-lifecycle-process-2.6.1\AndroidManifest.xml:29:13-31:52
+58                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+58-->[androidx.lifecycle:lifecycle-process:2.6.1] C:\Users\mrrob\.gradle\caches\9.3.1\transforms\01c26e469261bece587fc1f3af6c7fae\workspace\transformed\jetified-lifecycle-process-2.6.1\AndroidManifest.xml:30:17-78
+59                android:value="androidx.startup" />
+59-->[androidx.lifecycle:lifecycle-process:2.6.1] C:\Users\mrrob\.gradle\caches\9.3.1\transforms\01c26e469261bece587fc1f3af6c7fae\workspace\transformed\jetified-lifecycle-process-2.6.1\AndroidManifest.xml:31:17-49
+60            <meta-data
+60-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\mrrob\.gradle\caches\9.3.1\transforms\95c65fb607b66cccefbf08ed3688cfb9\workspace\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:29:13-31:52
+61                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+61-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\mrrob\.gradle\caches\9.3.1\transforms\95c65fb607b66cccefbf08ed3688cfb9\workspace\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:30:17-85
+62                android:value="androidx.startup" />
+62-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\mrrob\.gradle\caches\9.3.1\transforms\95c65fb607b66cccefbf08ed3688cfb9\workspace\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:31:17-49
+63        </provider>
+64
+65        <receiver
+65-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\mrrob\.gradle\caches\9.3.1\transforms\95c65fb607b66cccefbf08ed3688cfb9\workspace\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:34:9-52:20
+66            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+66-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\mrrob\.gradle\caches\9.3.1\transforms\95c65fb607b66cccefbf08ed3688cfb9\workspace\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:35:13-76
+67            android:directBootAware="false"
+67-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\mrrob\.gradle\caches\9.3.1\transforms\95c65fb607b66cccefbf08ed3688cfb9\workspace\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:36:13-44
+68            android:enabled="true"
+68-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\mrrob\.gradle\caches\9.3.1\transforms\95c65fb607b66cccefbf08ed3688cfb9\workspace\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:37:13-35
+69            android:exported="true"
+69-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\mrrob\.gradle\caches\9.3.1\transforms\95c65fb607b66cccefbf08ed3688cfb9\workspace\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:38:13-36
+70            android:permission="android.permission.DUMP" >
+70-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\mrrob\.gradle\caches\9.3.1\transforms\95c65fb607b66cccefbf08ed3688cfb9\workspace\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:39:13-57
+71            <intent-filter>
+71-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\mrrob\.gradle\caches\9.3.1\transforms\95c65fb607b66cccefbf08ed3688cfb9\workspace\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:40:13-42:29
+72                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+72-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\mrrob\.gradle\caches\9.3.1\transforms\95c65fb607b66cccefbf08ed3688cfb9\workspace\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:41:17-91
+72-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\mrrob\.gradle\caches\9.3.1\transforms\95c65fb607b66cccefbf08ed3688cfb9\workspace\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:41:25-88
+73            </intent-filter>
+74            <intent-filter>
+74-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\mrrob\.gradle\caches\9.3.1\transforms\95c65fb607b66cccefbf08ed3688cfb9\workspace\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:43:13-45:29
+75                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+75-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\mrrob\.gradle\caches\9.3.1\transforms\95c65fb607b66cccefbf08ed3688cfb9\workspace\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:44:17-85
+75-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\mrrob\.gradle\caches\9.3.1\transforms\95c65fb607b66cccefbf08ed3688cfb9\workspace\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:44:25-82
+76            </intent-filter>
+77            <intent-filter>
+77-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\mrrob\.gradle\caches\9.3.1\transforms\95c65fb607b66cccefbf08ed3688cfb9\workspace\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:46:13-48:29
+78                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+78-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\mrrob\.gradle\caches\9.3.1\transforms\95c65fb607b66cccefbf08ed3688cfb9\workspace\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:47:17-88
+78-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\mrrob\.gradle\caches\9.3.1\transforms\95c65fb607b66cccefbf08ed3688cfb9\workspace\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:47:25-85
+79            </intent-filter>
+80            <intent-filter>
+80-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\mrrob\.gradle\caches\9.3.1\transforms\95c65fb607b66cccefbf08ed3688cfb9\workspace\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:49:13-51:29
+81                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+81-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\mrrob\.gradle\caches\9.3.1\transforms\95c65fb607b66cccefbf08ed3688cfb9\workspace\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:50:17-95
+81-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\mrrob\.gradle\caches\9.3.1\transforms\95c65fb607b66cccefbf08ed3688cfb9\workspace\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:50:25-92
+82            </intent-filter>
+83        </receiver>
+84    </application>
+85
+86</manifest>
