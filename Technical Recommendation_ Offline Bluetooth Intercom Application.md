@@ -1,70 +1,69 @@
 # Technical Recommendation: Offline Bluetooth Intercom Application
 
-## Panimula
+## Introduction
 
-Ang layunin ng dokumentong ito ay magbigay ng teknikal na rekomendasyon para sa pagbuo ng isang offline na intercom application na gumagamit ng Bluetooth para sa komunikasyon. Ang pangunahing kinakailangan ay ang kakayahan nitong gumana nang walang koneksyon sa internet o cellular signal, at dapat itong makapag-ruta ng audio sa mga nakakonektang Bluetooth earbuds.
+The purpose of this document is to provide a technical recommendation for developing an offline intercom application that utilizes Bluetooth for communication. The primary requirement is the ability to function without an internet connection or cellular signal, and it must be capable of routing audio to connected Bluetooth earbuds.
 
-## Teknikal na Pangkalahatang-ideya
+## Technical Overview
 
-Ang pagbuo ng isang offline na Bluetooth intercom application ay nangangailangan ng paggamit ng **Bluetooth Classic** (partikular ang RFCOMM protocol) para sa direktang komunikasyon sa pagitan ng dalawang mobile device. Ang audio routing, lalo na kapag may nakakonektang Bluetooth earbuds, ay isang kritikal na aspeto na nangangailangan ng maingat na pagpapatupad.
+Developing an offline Bluetooth intercom application requires using **Bluetooth Classic** (specifically the RFCOMM protocol) for direct communication between two mobile devices. Audio routing, especially when Bluetooth earbuds are connected, is a critical aspect that requires careful implementation.
 
-### Bluetooth Classic (RFCOMM) para sa Komunikasyon
+### Bluetooth Classic (RFCOMM) for Communication
 
-Ang **RFCOMM (Radio Frequency Communication)** ay isang protocol na nagbibigay ng emulated serial port sa ibabaw ng Bluetooth. Ito ang karaniwang ginagamit para sa data transfer sa pagitan ng dalawang Bluetooth device. Sa konteksto ng isang intercom app, ang RFCOMM ay gagamitin upang magtatag ng isang peer-to-peer na koneksyon sa pagitan ng dalawang telepono. Kapag nakakonekta, ang bawat device ay magkakaroon ng `BluetoothSocket` na magpapahintulot sa pagpapadala at pagtanggap ng data sa pamamagitan ng `InputStream` at `OutputStream` [1].
+**RFCOMM (Radio Frequency Communication)** is a protocol that provides an emulated serial port over Bluetooth. It is standardly used for data transfer between two Bluetooth devices. In the context of an intercom app, RFCOMM will be used to establish a peer-to-peer connection between two phones. Once connected, each device will have a `BluetoothSocket` that allows sending and receiving data through `InputStream` and `OutputStream` [1].
 
-Ang proseso ng paglilipat ng data ay kinabibilangan ng pagkuha ng audio mula sa mikropono, pag-compress nito upang mabawasan ang laki ng data, at pagkatapos ay ipadala ito bilang mga byte array sa pamamagitan ng `OutputStream`. Sa kabilang dulo, babasahin ng tumatanggap na device ang mga byte mula sa `InputStream`, ide-decompress ang audio, at ipe-play ito sa pamamagitan ng speaker o nakakonektang headset [1].
+The data transfer process involves capturing audio from the microphone, compressing it to reduce data size, and then sending it as byte arrays through the `OutputStream`. At the other end, the receiving device reads the bytes from the `InputStream`, decompresses the audio, and plays it through the speaker or connected headset [1].
 
-### Paghawak ng Bluetooth Earbuds at Audio Routing
+### Handling Bluetooth Earbuds and Audio Routing
 
-Ang isang mahalagang hamon ay ang pagtiyak na ang audio ay nararapat na dumaan sa nakakonektang Bluetooth earbuds para sa parehong input (mikropono) at output (speaker). Ang mga mobile device ay maaaring magpanatili ng maraming koneksyon sa Bluetooth na gumagamit ng iba't ibang profile. Halimbawa, ang koneksyon ng telepono sa telepono para sa data ay maaaring gumamit ng **Serial Port Profile (SPP)** o custom RFCOMM, habang ang koneksyon ng telepono sa earbuds ay maaaring gumamit ng **A2DP (Advanced Audio Distribution Profile)** para sa mataas na kalidad na musika o **HFP/HSP (Hands-Free Profile/Headset Profile)** para sa voice calls [2].
+A significant challenge is ensuring that audio correctly passes through connected Bluetooth earbuds for both input (microphone) and output (speaker). Mobile devices can maintain multiple Bluetooth connections using different profiles. For example, a phone-to-phone connection for data might use **Serial Port Profile (SPP)** or custom RFCOMM, while a phone-to-earbuds connection might use **A2DP (Advanced Audio Distribution Profile)** for high-quality music or **HFP/HSP (Hands-Free Profile/Headset Profile)** for voice calls [2].
 
-Upang ma-ruta ang audio sa Bluetooth earbuds para sa voice communication, kinakailangan ang paggamit ng **Synchronous Connection Oriented (SCO)** link. Ang SCO ay isang two-way, full-duplex na koneksyon na ginagamit para sa voice data. Sa Android, ito ay maaaring i-activate gamit ang `AudioManager.startBluetoothSco()` at `AudioManager.setBluetoothScoOn(true)`. Mahalaga ring itakda ang audio mode sa `MODE_IN_COMMUNICATION` upang ipahiwatig na ang application ay kasalukuyang ginagamit para sa komunikasyon. Dapat tandaan na ang SCO ay nagbibigay ng mas mababang kalidad ng audio (karaniwang 8kHz o 16kHz mono) kumpara sa A2DP, ngunit ito ay kinakailangan para sa two-way voice sa pamamagitan ng Bluetooth headsets [2] [3].
+To route audio to Bluetooth earbuds for voice communication, the use of a **Synchronous Connection Oriented (SCO)** link is required. SCO is a two-way, full-duplex connection used for voice data. On Android, this can be activated using `AudioManager.startBluetoothSco()` and `AudioManager.setBluetoothScoOn(true)`. It is also important to set the audio mode to `MODE_IN_COMMUNICATION` to indicate that the application is currently being used for communication. Note that SCO provides lower audio quality (typically 8kHz or 16kHz mono) compared to A2DP, but it is necessary for two-way voice via Bluetooth headsets [2] [3].
 
-## Pagiging Posible at mga Hamon
+## Feasibility and Challenges
 
-Ang pagbuo ng ganitong uri ng application ay lubos na posible, ngunit may ilang mga hamon na dapat isaalang-alang:
+Developing this type of application is highly feasible, but several challenges must be considered:
 
-*   **Pagiging Kumplikado ng Bluetooth API**: Ang direktang pagtatrabaho sa Bluetooth Classic API sa Android at iOS ay maaaring maging kumplikado, lalo na sa paghawak ng iba't ibang bersyon ng Android at mga pagbabago sa pag-uugali ng Bluetooth sa paglipas ng panahon.
-*   **Audio Latency at Kalidad**: Ang pag-compress, pagpapadala, at pag-decompress ng audio sa ibabaw ng Bluetooth ay maaaring magpakilala ng latency. Ang pagpili ng tamang audio codec at buffer size ay mahalaga upang mapanatili ang katanggap-tanggap na kalidad ng boses at mababang latency.
-*   **Pamamahala ng Koneksyon**: Ang pagpapanatili ng matatag na koneksyon sa Bluetooth, lalo na sa mga dynamic na kapaligiran kung saan maaaring lumabas at pumasok ang mga device sa saklaw, ay nangangailangan ng matatag na lohika sa pamamahala ng koneksyon.
-*   **Paggamit ng Baterya**: Ang patuloy na paggamit ng Bluetooth radio at audio processing ay maaaring magkaroon ng malaking epekto sa paggamit ng baterya ng device.
+*   **Bluetooth API Complexity**: Working directly with the Bluetooth Classic API on Android and iOS can be complex, especially handling different Android versions and changes in Bluetooth behavior over time.
+*   **Audio Latency and Quality**: Compressing, sending, and decompressing audio over Bluetooth can introduce latency. Choosing the right audio codec and buffer size is essential to maintain acceptable voice quality and low latency.
+*   **Connection Management**: Maintaining a stable Bluetooth connection, especially in dynamic environments where devices may move in and out of range, requires robust connection management logic.
+*   **Battery Usage**: Continuous use of the Bluetooth radio and audio processing can have a significant impact on the device's battery consumption.
 
-## Inirerekomendang Teknikal na Diskarte
+## Recommended Technical Approach
 
-Para sa isang matatag at mahusay na pagpapatupad, inirerekomenda ang sumusunod na diskarte:
+For a robust and efficient implementation, the following approach is recommended:
 
 ### Platform
 
-Bagama't ang mga cross-platform framework tulad ng React Native o Flutter ay maaaring magamit, ang pagbuo ng application gamit ang **native development (Kotlin/Java para sa Android at Swift/Objective-C para sa iOS)** ay magbibigay ng pinakamahusay na kontrol sa low-level na Bluetooth at audio routing API. Ito ay magpapahintulot para sa mas mahusay na pag-optimize at paghawak ng mga partikular na kaso ng paggamit na may kaugnayan sa Bluetooth earbuds.
+While cross-platform frameworks like React Native or Flutter can be used, developing the application using **native development (Kotlin/Java for Android and Swift/Objective-C for iOS)** provides the best control over low-level Bluetooth and audio routing APIs. This allows for better optimization and handling of specific use cases related to Bluetooth earbuds.
 
-### Mga Pangunahing Hakbang sa Pagpapatupad
+### Key Implementation Steps
 
-1.  **Mga Pahintulot**: Humiling ng kinakailangang mga pahintulot sa Bluetooth (`BLUETOOTH_CONNECT`, `BLUETOOTH_SCAN`, `BLUETOOTH_ADVERTISE`) at audio (`RECORD_AUDIO`) mula sa user [4].
-2.  **Pagtuklas at Pagpapares**: Ipatupad ang pagtuklas ng device gamit ang `BluetoothAdapter` upang mahanap ang mga kalapit na device na nagpapatakbo ng intercom app. Bagama't ang pagpapares ay karaniwang kinakailangan, ang ilang mga diskarte ay maaaring magpapahintulot sa 
-direktang koneksyon nang walang paunang pagpapares sa pamamagitan ng paggamit ng `createRfcommSocketToServiceRecord()` at `listenUsingRfcommWithServiceRecord()` na may parehong UUID [5].
-3.  **Koneksyon ng Socket**: Magtatag ng isang RFCOMM socket connection sa pagitan ng dalawang device gamit ang isang natatanging UUID. Ang isang device ay kikilos bilang server (magbubukas ng `BluetoothServerSocket`) at ang isa ay bilang client (magtatatag ng `BluetoothSocket`) [1].
-4.  **Pagproseso ng Audio**:
-    *   **Pagkuha**: Gamitin ang `AudioRecord` upang makuha ang raw PCM audio data mula sa mikropono ng device.
-    *   **Compression**: Upang mabawasan ang laki ng data at mapabuti ang pagganap sa paglipat ng Bluetooth, kinakailangan ang audio compression. Ang mga codec tulad ng Opus o AAC ay maaaring gamitin. Ang `MediaCodec` API ng Android ay maaaring gamitin para sa hardware-accelerated encoding at decoding [6].
-    *   **Pagpapadala**: Ipadala ang compressed audio data bilang mga byte array sa pamamagitan ng `OutputStream` ng `BluetoothSocket`.
-    *   **Pag-playback**: Sa tumatanggap na device, basahin ang mga byte mula sa `InputStream`, i-decompress ang audio, at i-play ito gamit ang `AudioTrack` [1].
-5.  **Audio Routing para sa Earbuds**: Ito ang pinakamahalagang bahagi para sa iyong kinakailangan. Ang sumusunod na pagkakasunod-sunod ng mga aksyon ay kinakailangan upang ma-ruta ang audio sa isang nakakonektang Bluetooth headset:
-    *   Suriin kung may nakakonektang Bluetooth headset (HFP/HSP profile).
-    *   Simulan ang Bluetooth SCO audio connection gamit ang `AudioManager.startBluetoothSco()`.
-    *   Maghintay para sa `ACTION_SCO_AUDIO_STATE_UPDATED` broadcast upang kumpirmahin na ang SCO connection ay naitatag.
-    *   Itakda ang audio mode sa `AudioManager.MODE_IN_COMMUNICATION`.
-    *   Itakda ang `AudioManager.setBluetoothScoOn(true)`.
-    *   Kapag tapos na ang komunikasyon, huwag kalimutang tawagan ang `AudioManager.stopBluetoothSco()` at ibalik ang audio mode sa dati nitong estado [3].
+1.  **Permissions**: Request necessary Bluetooth permissions (`BLUETOOTH_CONNECT`, `BLUETOOTH_SCAN`, `BLUETOOTH_ADVERTISE`) and audio permissions (`RECORD_AUDIO`) from the user [4].
+2.  **Discovery and Pairing**: Implement device discovery using `BluetoothAdapter` to find nearby devices running the intercom app. While pairing is typically required, some techniques allow direct connection without prior pairing by using `createRfcommSocketToServiceRecord()` and `listenUsingRfcommWithServiceRecord()` with the same UUID [5].
+3.  **Socket Connection**: Establish an RFCOMM socket connection between two devices using a unique UUID. One device will act as the server (opening a `BluetoothServerSocket`) and the other as the client (establishing a `BluetoothSocket`) [1].
+4.  **Audio Processing**:
+    *   **Capture**: Use `AudioRecord` to capture raw PCM audio data from the device's microphone.
+    *   **Compression**: To reduce data size and improve Bluetooth transfer performance, audio compression is necessary. Codecs like Opus or AAC can be used. Android's `MediaCodec` API can be used for hardware-accelerated encoding and decoding [6].
+    *   **Transmission**: Send the compressed audio data as byte arrays through the `OutputStream` of the `BluetoothSocket`.
+    *   **Playback**: On the receiving device, read the bytes from the `InputStream`, decompress the audio, and play it using `AudioTrack` [1].
+5.  **Audio Routing for Earbuds**: This is the most critical part for your requirement. The following sequence of actions is required to route audio to a connected Bluetooth headset:
+    *   Check if a Bluetooth headset is connected (HFP/HSP profile).
+    *   Start the Bluetooth SCO audio connection using `AudioManager.startBluetoothSco()`.
+    *   Wait for the `ACTION_SCO_AUDIO_STATE_UPDATED` broadcast to confirm that the SCO connection has been established.
+    *   Set the audio mode to `AudioManager.MODE_IN_COMMUNICATION`.
+    *   Set `AudioManager.setBluetoothScoOn(true)`.
+    *   When communication is finished, remember to call `AudioManager.stopBluetoothSco()` and return the audio mode to its previous state [3].
 
-### Alternatibong Library: Google Nearby Connections API
+### Alternative Library: Google Nearby Connections API
 
-Para sa mga developer na nais ng mas mataas na antas ng abstraction at mas madaling pamamahala ng koneksyon, ang **Google Nearby Connections API** ay isang mahusay na alternatibo. Ito ay nagbibigay-daan sa pagtuklas ng device, pagtatatag ng koneksyon, at paglilipat ng data sa pagitan ng mga kalapit na device gamit ang iba't ibang teknolohiya (Bluetooth, Wi-Fi Direct, atbp.) nang hindi kinakailangang direktang pamahalaan ang mga low-level na Bluetooth socket. Gayunpaman, maaaring mas mahirap kontrolin ang tiyak na audio routing sa mga Bluetooth earbuds gamit ang API na ito, na maaaring mangailangan pa rin ng ilang direktang `AudioManager` na tawag [7].
+For developers who want a higher level of abstraction and easier connection management, the **Google Nearby Connections API** is an excellent alternative. It enables device discovery, connection establishment, and data transfer between nearby devices using various technologies (Bluetooth, Wi-Fi Direct, etc.) without having to directly manage low-level Bluetooth sockets. However, controlling specific audio routing to Bluetooth earbuds might be more difficult using this API and may still require some direct `AudioManager` calls [7].
 
-## Konklusyon
+## Conclusion
 
-Ang pagbuo ng isang offline na Bluetooth intercom application na sumusuporta sa Bluetooth earbuds ay isang teknikal na magagawa na proyekto. Ang pangunahing diskarte ay nakasentro sa paggamit ng Bluetooth Classic (RFCOMM) para sa data transfer at maingat na pamamahala ng `AudioManager` para sa audio routing sa SCO profile. Bagama't may mga hamon sa pagiging kumplikado ng Bluetooth API at pamamahala ng audio, ang native development sa Android ay nagbibigay ng kinakailangang kontrol upang matugunan ang mga kinakailangan na ito. Ang pagpili ng tamang audio codec at pagpapatupad ng matatag na pamamahala ng koneksyon ay magiging susi sa tagumpay ng application.
+Developing an offline Bluetooth intercom application that supports Bluetooth earbuds is a technically feasible project. The core strategy centers on using Bluetooth Classic (RFCOMM) for data transfer and careful management of the `AudioManager` for audio routing via the SCO profile. While there are challenges in Bluetooth API complexity and audio management, native development on Android provides the necessary control to meet these requirements. Choosing the right audio codec and implementing robust connection management will be key to the application's success.
 
-## Mga Sanggunian
+## References
 
 [1] Transfer Bluetooth data | Connectivity | Android Developers. (n.d.). Retrieved from [https://developer.android.com/develop/connectivity/bluetooth/transfer-data](https://developer.android.com/develop/connectivity/bluetooth/transfer-data)
 [2] Bluetooth in Mobile App Development: Essential Overview - COBE. (2024, October 30). Retrieved from [https://www.cobeisfresh.com/blog/bluetooth-in-mobile-app-development-essential-overview](https://www.cobeisfresh.com/blog/bluetooth-in-mobile-app-development-essential-overview)
@@ -72,4 +71,4 @@ Ang pagbuo ng isang offline na Bluetooth intercom application na sumusuporta sa 
 [4] Bluetooth App Development: Understanding iOS, Android and Cross ... (2023, October 2). Retrieved from [https://www.yeti.co/blog/bluetooth-app-development-understanding-ios-android-and-cross-platform-solutions](https://www.yeti.co/blog/bluetooth-app-development-understanding-ios-android-and-cross-platform-solutions)
 [5] Creating Bluetooth sockets on Android without pairing. (2018, March 26). Retrieved from [https://albertarmea.com/post/bt-auto-connect/](https://albertarmea.com/post/bt-auto-connect/)
 [6] TechNote_BluetoothAudio · google/oboe Wiki. (n.d.). Retrieved from [https://github.com/google/oboe/wiki/TechNote_BluetoothAudio](https://github.com/google/oboe/wiki/TechNote_BluetoothAudio)
-[7] Google Nearby Connections API. (n.d.). Retrieved from [https://developers.google.com/nearby/connections/overview](https://developers.google.com/nearby/connections/overview) (Note: This link is a general overview, specific details on audio routing with earbuds might require further investigation within the API documentation.)
+[7] Google Nearby Connections API. (n.d.). Retrieved from [https://developers.google.com/nearby/connections/overview](https://developers.google.com/nearby/connections/overview)
